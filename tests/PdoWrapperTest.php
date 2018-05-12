@@ -13,12 +13,7 @@ class PdoWrapperTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->credentials = [
-            "host" => "172.17.0.3",
-            "database" => "test",
-            "username" => "root",
-            "password" => "password",
-        ];
+        $this->credentials = json_decode(file_get_contents(__DIR__ . "/../credentials.json"), true);
     }
 
     public function tearDown()
