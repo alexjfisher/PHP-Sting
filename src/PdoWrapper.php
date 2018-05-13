@@ -54,6 +54,7 @@ class PdoWrapper
                     $this->username,
                     $this->password
                 );
+                $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         }
         catch (Exception $exception) {
@@ -117,6 +118,7 @@ class PdoWrapper
         try {
             $statement = $this->connection->prepare($sqlStatement);
             $statement->execute();
+
             if (! is_null($fetchStyle) && ! is_null($fetchArgument)) {
                 return $statement->fetchAll($fetchStyle, $fetchArgument);
             }

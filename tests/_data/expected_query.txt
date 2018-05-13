@@ -1,4 +1,4 @@
-a:7:{i:0;s:39:"SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";";i:1;s:337:"CREATE TABLE `test_table` (
+a:7:{i:0;s:39:"SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";";i:1;s:351:"CREATE TABLE IF NOT EXISTS `test_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `day` varchar(45) DEFAULT NULL,
   `month` varchar(45) DEFAULT NULL,
@@ -6,4 +6,4 @@ a:7:{i:0;s:39:"SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";";i:1;s:337:"CREATE TABLE 
   `flag_1` tinyint(1) unsigned DEFAULT NULL,
   `flag_2` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;";i:2;s:127:"INSERT INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (1,'Monday','January','2018-05-12 00:00:00',1,1);";i:3;s:129:"INSERT INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (2,'Tuesday','February','2018-05-12 00:00:00',0,1);";i:4;s:128:"INSERT INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (3,'Wednesday','March','2018-05-12 00:00:00',0,0);";i:5;s:127:"INSERT INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (4,'Thursday','April','2018-05-12 00:00:00',1,1);";i:6;s:123:"INSERT INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (5,'Friday','May','2018-05-12 00:00:00',1,0);";}
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;";i:2;s:134:"INSERT IGNORE INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (1,'Monday','January','2018-05-12 00:00:00',1,1);";i:3;s:136:"INSERT IGNORE INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (2,'Tuesday','February','2018-05-12 00:00:00',0,1);";i:4;s:135:"INSERT IGNORE INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (3,'Wednesday','March','2018-05-12 00:00:00',0,0);";i:5;s:134:"INSERT IGNORE INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (4,'Thursday','April','2018-05-12 00:00:00',1,1);";i:6;s:130:"INSERT IGNORE INTO `test_table` (`id`,`day`,`month`,`date`,`flag_1`,`flag_2`) VALUES (5,'Friday','May','2018-05-12 00:00:00',1,0);";}

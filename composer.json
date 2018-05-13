@@ -12,8 +12,10 @@
   "homepage": "https://github.com/zgr3doo/PHP-Sting",
   "license": "MIT",
   "authors": [
-    "name": "Piotr Rykala",
-    "email": "zgr3doo@gmail.com"
+    {
+      "name": "Piotr Rykala",
+      "email": "zgr3doo@gmail.com"
+    }
   ],
   "require": {
     "php": "^5.3 || ^7.0"

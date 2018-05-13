@@ -4,6 +4,7 @@ namespace PhpSting;
 
 
 use Exception;
+use PDO;
 use PHPUnit_Framework_TestCase;
 
 class PdoWrapperTest extends PHPUnit_Framework_TestCase
@@ -55,5 +56,45 @@ class PdoWrapperTest extends PHPUnit_Framework_TestCase
 
         // then
         $this->assertTrue($db->isConnected());
+    }
+
+    public function test_runSqlStatement_invalidFixture()
+    {
+        // given
+        $sqlFileA = new SqlFileStream(__DIR__ . '/_data/exception_in_fixture_a.sql');
+        $sqlFileB = new SqlFileStream(__DIR__ . '/_data/exception_in_fixture_b.sql');
+        $db = new PdoWrapper(
+            $this->credentials['host'],
+            $this->credentials['database'],
+            $this->credentials['username'],
+            $this->credentials['password']);
+        $db->connect();
+
+
+        // then
+        $this->expectException(Exception::class);
+
+        // when
+        $db->applyFixture($sqlFileA);
+        $db->applyFixture($sqlFileB);
+    }
+
+    public function test_runSqlStatement_throwExceptionOnQueryFailure()
+    {
+        // given
+        $sqlFile = new SqlFileStream(__DIR__ . '/_data/exception_in_fixture_a.sql');
+        $db = new PdoWrapper(
+            $this->credentials['host'],
+            $this->credentials['database'],
+            $this->credentials['username'],
+            $this->credentials['password']);
+        $db->connect();
+        $db->applyFixture($sqlFile);
+
+        // then
+        $this->expectException(Exception::class);
+
+        // when
+        $db->runSqlStatement("INSERT INTO test VALUES (1);");
     }
 }
