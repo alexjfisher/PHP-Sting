@@ -7,6 +7,7 @@ namespace PhpSting;
 class CsvFixtureLoader
 {
     const READ_MODE = 'r';
+    const WRITE_MODE = 'w';
     const LINE_LENGTH = 1000;
     const DELIMITER = ',';
 
@@ -39,6 +40,7 @@ class CsvFixtureLoader
                 $currentRow = fgetcsv($fileHandle, $this->lineLength, $this->delimiter);
                 $fixture[] = $this->loadFixtureRow($fixtureLabels, $currentRow);
             } while ($currentRow !== FALSE);
+
             fclose($fileHandle);
         }
         return $fixture;
@@ -56,5 +58,23 @@ class CsvFixtureLoader
             $currentFixture[$currentLabel] = $fixtureRow[$currentLabelKey];
         }
         return $currentFixture;
+    }
+
+    /**
+     * @param string $csvFileLocation
+     * @param array $data
+     */
+    public function saveFixtureToCSV($csvFileLocation, $data)
+    {
+        $fileHandle = fopen($csvFileLocation, self::WRITE_MODE);
+        if ($fileHandle !== FALSE) {
+            fputcsv($fileHandle, array_keys($data[0]));
+
+            foreach ($data as $currentRow) {
+                fputcsv($fileHandle, $currentRow);
+            }
+
+            fclose($fileHandle);
+        }
     }
 }

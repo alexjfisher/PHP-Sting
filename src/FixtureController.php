@@ -24,13 +24,22 @@ class FixtureController
      */
     private $sqlFixture;
 
+    /** @var null|CsvFixtureLoader */
+    private $csvFixtureLoader;
+
     /**
      * FixtureController constructor.
      * @param PdoWrapper $db
+     * @param CsvFixtureLoader|null $csvFixtureLoader
      */
-    public function __construct(PdoWrapper $db)
+    public function __construct(PdoWrapper $db, CsvFixtureLoader $csvFixtureLoader = null)
     {
         $this->db = $db;
+
+        if (is_null($csvFixtureLoader)) {
+            $this->csvFixtureLoader = new CsvFixtureLoader();
+        }
+        $this->csvFixtureLoader = $csvFixtureLoader;
     }
 
     /**
@@ -70,7 +79,8 @@ class FixtureController
      * @return array
      * @throws Exception
      */
-    public function getRecordsFromTableAsArray($tableName, $limit = null) {
+    public function getRecordsFromTableAsArray($tableName, $limit = null)
+    {
         $this->db->connect();
 
         $sql = sprintf("SELECT * FROM test.%s;", $tableName);
@@ -94,5 +104,14 @@ class FixtureController
         foreach ($testTableNames as $currentTestTableName) {
             $this->db->runSqlStatement(sprintf("DROP TABLE IF EXISTS test.%s;", $currentTestTableName));
         }
+    }
+
+    /**
+     * @param string $csvFileLocation
+     * @return array
+     */
+    public function loadFixtureFromCSV($csvFileLocation)
+    {
+        return $this->csvFixtureLoader->loadFixtureFromCSV($csvFileLocation);
     }
 }
