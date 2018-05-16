@@ -54,7 +54,7 @@ class CsvFixtureLoader
     {
         $currentFixture = [];
         foreach ($fixtureLabels as $currentLabelKey => $currentLabel) {
-            $currentFixture[$currentLabel] = $fixtureRow[$currentLabelKey];
+            $currentFixture[trim($currentLabel)] = trim($fixtureRow[$currentLabelKey]);
         }
         return $currentFixture;
     }
