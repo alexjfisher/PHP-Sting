@@ -36,10 +36,9 @@ class CsvFixtureLoader
         if ($fileHandle !== FALSE) {
             $fixtureLabels = fgetcsv($fileHandle, $this->lineLength, $this->delimiter);
 
-            do {
-                $currentRow = fgetcsv($fileHandle, $this->lineLength, $this->delimiter);
+            while (($currentRow = fgetcsv($fileHandle, $this->lineLength, $this->delimiter)) !== FALSE) {
                 $fixture[] = $this->loadFixtureRow($fixtureLabels, $currentRow);
-            } while ($currentRow !== FALSE);
+            }
 
             fclose($fileHandle);
         }
