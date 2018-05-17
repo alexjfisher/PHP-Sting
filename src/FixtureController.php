@@ -25,21 +25,20 @@ class FixtureController
     private $sqlFixture;
 
     /** @var null|CsvFixtureLoader */
-    private $csvFixtureLoader;
+    private $fixtureLoader;
 
     /**
      * FixtureController constructor.
      * @param PdoWrapper $db
-     * @param CsvFixtureLoader|null $csvFixtureLoader
+     * @param FixtureLoaderInterface|null $fixtureLoader
      */
-    public function __construct(PdoWrapper $db, CsvFixtureLoader $csvFixtureLoader = null)
+    public function __construct(PdoWrapper $db, FixtureLoaderInterface $fixtureLoader = null)
     {
         $this->db = $db;
 
-        if (is_null($csvFixtureLoader)) {
-            $this->csvFixtureLoader = new CsvFixtureLoader();
+        if (! is_null($fixtureLoader)) {
+            $this->fixtureLoader = $fixtureLoader;
         }
-        $this->csvFixtureLoader = $csvFixtureLoader;
     }
 
     /**
@@ -107,11 +106,11 @@ class FixtureController
     }
 
     /**
-     * @param string $csvFileLocation
+     * @param string $fileLocation
      * @return array
      */
-    public function loadFixtureFromCSV($csvFileLocation)
+    public function loadFixture($fileLocation)
     {
-        return $this->csvFixtureLoader->loadFixtureFromCSV($csvFileLocation);
+        return $this->fixtureLoader->loadFixture($fileLocation);
     }
 }

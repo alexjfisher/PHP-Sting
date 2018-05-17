@@ -4,7 +4,7 @@
 namespace PhpSting;
 
 
-class CsvFixtureLoader
+class CsvFixtureLoader implements FixtureLoaderInterface
 {
     const READ_MODE = 'r';
     const WRITE_MODE = 'w';
@@ -29,7 +29,7 @@ class CsvFixtureLoader
      * @param string $csvFileLocation
      * @return array
      */
-    public function loadFixtureFromCSV($csvFileLocation)
+    public function loadFixture($csvFileLocation)
     {
         $fixture = [];
         $fileHandle = fopen($csvFileLocation, self::READ_MODE);
@@ -63,7 +63,7 @@ class CsvFixtureLoader
      * @param string $csvFileLocation
      * @param array $data
      */
-    public function saveFixtureToCSV($csvFileLocation, $data)
+    public function saveFixture($csvFileLocation, $data)
     {
         $fileHandle = fopen($csvFileLocation, self::WRITE_MODE);
         if ($fileHandle !== FALSE) {
